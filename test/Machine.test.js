@@ -27,7 +27,6 @@ describe('The vending machine', () => {
     expect(vendingMachine.seeSelections()).toEqual([snack])
   })
 
-  // someone attempts to stock without inventory
   // it('stocks nothing if there is no inventory passed', () => {
   //   // setup
   //   const vendingMachine = new Machine()
@@ -46,5 +45,22 @@ describe('The vending machine', () => {
 
     // exercise & assert
     expect(() => vendingMachine.stock()).toThrow(displayMessage)
+  })
+
+  it('is able to receive and display inserted money', () => {
+    // setup
+    const vendingMachine = new Machine()
+    const displayMessage = 'You have deposited ¥100'
+
+    // assertion
+    expect(vendingMachine.insertMoney(100)).toEqual(displayMessage)
+  })
+
+  it ('only accepts bills in the denominations of 10, 20, 50, 100, and 500', () => {
+
+    const vendingMachine = new Machine()
+    const displayMessage = 'Fake money. Transaction declined.'
+
+    expect(vendingMachine.insertMoney(55)).toEqual(displayMessage)
   })
 })
